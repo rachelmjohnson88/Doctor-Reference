@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Category } from "@/lib/content";
 import { categoryColors } from "@/lib/theme";
-import CategoryIcon from "./CategoryIcon";
 
 export default function CategoryCard({
   category,
@@ -17,12 +17,14 @@ export default function CategoryCard({
       href={`/category/${category.slug}`}
       className={`group block rounded-xl border border-(--color-rule) bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md ${colors.ring}`}
     >
-      <div className="flex items-start gap-3">
-        <span
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${colors.icon}`}
-        >
-          <CategoryIcon slug={category.slug} className="h-4.5 w-4.5" />
-        </span>
+      <div className="flex items-start gap-3.5">
+        <Image
+          src={`/icons/${category.slug}.jpg`}
+          alt=""
+          width={56}
+          height={56}
+          className="h-14 w-14 shrink-0 rounded-lg object-cover"
+        />
         <div>
           <h3 className="font-serif font-semibold text-(--color-ink)">
             {category.name}
