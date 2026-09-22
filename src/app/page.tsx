@@ -61,25 +61,74 @@ export default async function Home() {
           ))}
         </div>
 
-        {articles.length === 0 && (
-          <p className="mt-8 text-sm text-slate-500">
-            No articles have been published yet.{" "}
-            <Link
-              href="/submit"
-              className="font-medium text-[#0f4c5c] underline underline-offset-4 hover:text-[#0b3a46]"
-            >
-              Submit the first one →
-            </Link>
-          </p>
-        )}
-
-        <div className="mt-10">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <Link
             href="/browse"
-            className="inline-flex items-center gap-1 text-sm font-medium text-[#0f4c5c] hover:text-[#0b3a46]"
+            className="group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md hover:ring-slate-300"
           >
-            Browse all articles
-            <span aria-hidden="true">→</span>
+            <div className="flex items-start gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.75}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4.5 w-4.5"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+              </span>
+              <div>
+                <h3 className="font-serif font-semibold text-slate-900">
+                  Browse all articles
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  See every published article across all areas.
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
+              {articles.length} {articles.length === 1 ? "article" : "articles"}
+            </p>
+          </Link>
+
+          <Link
+            href="/submit"
+            className="group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md hover:ring-[#0f4c5c]/30"
+          >
+            <div className="flex items-start gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0f4c5c]/10 text-[#0f4c5c]">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.75}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4.5 w-4.5"
+                  aria-hidden="true"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </span>
+              <div>
+                <h3 className="font-serif font-semibold text-slate-900">
+                  Submit an article
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  Contribute a clinical article, case review, or exam note.
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
+              Reviewed before publishing
+            </p>
           </Link>
         </div>
       </div>
