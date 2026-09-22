@@ -1,4 +1,4 @@
-import { getCategory } from "@/lib/content";
+import { getCategory, getContentType } from "@/lib/content";
 import { getContributorRequests, getPendingArticles } from "@/lib/store";
 import { isAdminAuthed } from "@/lib/auth";
 import PageHeader from "@/components/PageHeader";
@@ -95,6 +95,7 @@ export default async function AdminPage() {
                     key={entry.id}
                     entry={entry}
                     category={getCategory(entry.category)}
+                    contentType={getContentType(entry.type)}
                   />
                 ))}
               </div>

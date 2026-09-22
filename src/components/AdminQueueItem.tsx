@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PendingArticle } from "@/lib/store";
-import type { Category } from "@/lib/content";
+import type { Category, ContentType } from "@/lib/content";
 
 export default function AdminQueueItem({
   entry,
   category,
+  contentType,
 }: {
   entry: PendingArticle;
   category?: Category;
+  contentType?: ContentType;
 }) {
   const [busy, setBusy] = useState<"approve" | "reject" | null>(null);
   const router = useRouter();
@@ -29,9 +31,11 @@ export default function AdminQueueItem({
     <div className="rounded-lg border border-slate-200 bg-white p-5">
       <div className="flex items-start justify-between gap-4">
         <div>
-          {category && (
+          {(contentType || category) && (
             <span className="text-xs font-medium text-slate-500">
-              {category.name}
+              {contentType?.label}
+              {contentType && category && " · "}
+              {category?.name}
             </span>
           )}
           <h3 className="font-serif text-lg font-semibold text-slate-900">

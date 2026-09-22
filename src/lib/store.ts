@@ -9,6 +9,7 @@ export type PendingArticle = Article & {
 export type SubmissionInput = {
   title: string;
   category: string;
+  type: string;
   summary: string;
   tags: string[];
   sections: Section[];
@@ -37,6 +38,7 @@ export type ContributorRequestInput = {
 const PUBLISHED_KEY = "surgipedia:articles:published";
 const PENDING_KEY = "surgipedia:articles:pending";
 const CONTRIBUTORS_KEY = "surgipedia:contributors";
+const SUBSCRIBERS_KEY = "surgipedia:subscribers";
 
 const redisUrl =
   process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
@@ -55,6 +57,7 @@ type MemoryStore = {
   published: Article[];
   pending: PendingArticle[];
   contributors: ContributorRequest[];
+  subscribers: string[];
 };
 const globalForStore = globalThis as unknown as {
   __surgipediaMemory?: Partial<MemoryStore>;
@@ -63,6 +66,7 @@ const stashed = (globalForStore.__surgipediaMemory ??= {});
 stashed.published ??= [];
 stashed.pending ??= [];
 stashed.contributors ??= [];
+stashed.subscribers ??= [];
 const memory = stashed as MemoryStore;
 
 async function readPublished(): Promise<Article[]> {
@@ -102,6 +106,25 @@ async function writeContributors(requests: ContributorRequest[]): Promise<void> 
     return;
   }
   await redis.set(CONTRIBUTORS_KEY, requests);
+}
+
+async function readSubscribers(): Promise<string[]> {
+  if (!redis) return memory.subscribers;
+  return (await redis.get<string[]>(SUBSCRIBERS_KEY)) ?? [];
+}
+
+async function writeSubscribers(emails: string[]): Promise<void> {
+  if (!redis) {
+    memory.subscribers = emails;
+    return;
+  }
+  await redis.set(SUBSCRIBERS_KEY, emails);
+}
+
+export async function addSubscriber(email: string): Promise<void> {
+  const emails = await readSubscribers();
+  if (emails.includes(email)) return;
+  await writeSubscribers([...emails, email]);
 }
 
 function slugify(title: string): string {
@@ -156,6 +179,11 @@ export async function getPublishedByCategory(categorySlug: string): Promise<Arti
   return articles.filter((a) => a.category === categorySlug);
 }
 
+export async function getPublishedByType(typeSlug: string): Promise<Article[]> {
+  const articles = await readPublished();
+  return articles.filter((a) => a.type === typeSlug);
+}
+
 export async function searchPublished(query: string): Promise<Article[]> {
   const q = query.trim().toLowerCase();
   if (!q) return [];
@@ -176,6 +204,7 @@ export async function submitArticle(input: SubmissionInput): Promise<PendingArti
     id: crypto.randomUUID(),
     slug: "",
     category: input.category,
+    type: input.type,
     title: input.title,
     summary: input.summary,
     tags: input.tags,

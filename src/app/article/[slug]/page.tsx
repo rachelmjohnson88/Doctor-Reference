@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getCategory } from "@/lib/content";
+import { getCategory, getContentType } from "@/lib/content";
 import { getPublishedArticle } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +24,13 @@ export default async function ArticlePage({
   }
 
   const category = getCategory(article.category);
+  const contentType = getContentType(article.type);
+  const words = article.sections
+    .flatMap((s) => [s.heading, ...s.body])
+    .join(" ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+  const readTime = Math.max(1, Math.round(words / 200));
 
   return (
     <div>
@@ -38,19 +45,18 @@ export default async function ArticlePage({
             </Link>
           )}
 
-          {category && (
-            <p className="mt-4 font-mono text-xs tracking-wide text-(--color-accent) uppercase">
-              {category.name}
-            </p>
-          )}
+          <p className="mt-4 font-mono text-xs tracking-wide text-(--color-accent) uppercase">
+            {contentType?.label ?? "Article"}
+            {category && ` · ${category.name}`}
+          </p>
 
           <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-(--color-ink)">
             {article.title}
           </h1>
           <p className="mt-3 text-lg text-(--color-ink-soft)">{article.summary}</p>
           <p className="mt-2 font-mono text-xs tracking-wide text-(--color-ink-soft)/70 uppercase">
-            Contributed by {article.contributorName},{" "}
-            {article.contributorCredentials} · Last updated {article.updated}
+            {article.contributorName}, {article.contributorCredentials} ·{" "}
+            {readTime} min read · Last updated {article.updated}
           </p>
         </div>
       </section>

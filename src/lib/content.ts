@@ -3,9 +3,64 @@ export type Section = {
   body: string[];
 };
 
+export type ContentType = {
+  slug: string;
+  label: string;
+  plural: string;
+  description: string;
+};
+
+export const contentTypes: ContentType[] = [
+  {
+    slug: "article",
+    label: "Article",
+    plural: "Articles",
+    description: "General clinical articles covering a topic in depth.",
+  },
+  {
+    slug: "case",
+    label: "Case Review",
+    plural: "Cases",
+    description: "Real-world case reviews and the reasoning behind them.",
+  },
+  {
+    slug: "protocol",
+    label: "Protocol",
+    plural: "Protocols",
+    description: "Step-by-step clinical and perioperative protocols.",
+  },
+  {
+    slug: "score",
+    label: "Score",
+    plural: "Scores",
+    description: "Scoring systems, calculators, and diagnostic criteria.",
+  },
+  {
+    slug: "exam-note",
+    label: "Exam Note",
+    plural: "Exam",
+    description: "Concise notes written for exam revision.",
+  },
+  {
+    slug: "guide",
+    label: "Guide",
+    plural: "Guides",
+    description: "Practical how-to guides for common clinical tasks.",
+  },
+];
+
+export function getAllContentTypes(): ContentType[] {
+  return contentTypes;
+}
+
+export function getContentType(slug: string): ContentType | undefined {
+  return contentTypes.find((t) => t.slug === slug);
+}
+
 export type Article = {
   slug: string;
   category: string;
+  type: string;
   title: string;
   summary: string;
   updated: string;

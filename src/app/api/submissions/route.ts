@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllCategories } from "@/lib/content";
+import { getAllCategories, getAllContentTypes } from "@/lib/content";
 import { submitArticle } from "@/lib/store";
 
 type SectionInput = { heading: string; body: string[] };
@@ -10,6 +10,7 @@ type RequestBody = {
   contributorCredentials?: string;
   title?: string;
   category?: string;
+  type?: string;
   summary?: string;
   tags?: string;
   sections?: SectionInput[];
@@ -39,6 +40,7 @@ export async function POST(request: Request) {
   const contributorCredentials = body.contributorCredentials?.trim();
   const title = body.title?.trim();
   const category = body.category?.trim();
+  const type = body.type?.trim();
   const summary = body.summary?.trim();
   const sections = (body.sections ?? [])
     .map((s) => ({
@@ -52,13 +54,14 @@ export async function POST(request: Request) {
     !contributorCredentials ||
     !title ||
     !category ||
+    !type ||
     !summary ||
     sections.length === 0
   ) {
     return NextResponse.json(
       {
         error:
-          "Your name, qualifications, title, category, summary, and at least one section are required.",
+          "Your name, qualifications, title, category, content type, summary, and at least one section are required.",
       },
       { status: 400 }
     );
@@ -66,6 +69,10 @@ export async function POST(request: Request) {
 
   if (!getAllCategories().some((c) => c.slug === category)) {
     return NextResponse.json({ error: "Unknown category." }, { status: 400 });
+  }
+
+  if (!getAllContentTypes().some((t) => t.slug === type)) {
+    return NextResponse.json({ error: "Unknown content type." }, { status: 400 });
   }
 
   const tags = (body.tags ?? "")
@@ -78,6 +85,7 @@ export async function POST(request: Request) {
     contributorCredentials,
     title,
     category,
+    type,
     summary,
     tags,
     sections,

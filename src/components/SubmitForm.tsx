@@ -1,18 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import type { Category } from "@/lib/content";
+import type { Category, ContentType } from "@/lib/content";
 
 type SectionDraft = { heading: string; bodyText: string };
 
 const emptySection = (): SectionDraft => ({ heading: "", bodyText: "" });
 
-export default function SubmitForm({ categories }: { categories: Category[] }) {
+export default function SubmitForm({
+  categories,
+  contentTypes,
+}: {
+  categories: Category[];
+  contentTypes: ContentType[];
+}) {
   const [passphrase, setPassphrase] = useState("");
   const [contributorName, setContributorName] = useState("");
   const [contributorCredentials, setContributorCredentials] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]?.slug ?? "");
+  const [type, setType] = useState(contentTypes[0]?.slug ?? "");
   const [summary, setSummary] = useState("");
   const [tags, setTags] = useState("");
   const [sections, setSections] = useState<SectionDraft[]>([emptySection()]);
@@ -50,6 +57,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           contributorCredentials,
           title,
           category,
+          type,
           summary,
           tags,
           sections: sections.map((s) => ({
@@ -153,21 +161,40 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-slate-700">
-          Specialty area
-        </label>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
-        >
-          {categories.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-wrap gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-700">
+            Content type
+          </label>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="mt-1 w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
+          >
+            {contentTypes.map((t) => (
+              <option key={t.slug} value={t.slug}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700">
+            Specialty area
+          </label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="mt-1 w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
+          >
+            {categories.map((c) => (
+              <option key={c.slug} value={c.slug}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div>
