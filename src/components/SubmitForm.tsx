@@ -9,6 +9,7 @@ const emptySection = (): SectionDraft => ({ heading: "", bodyText: "" });
 
 export default function SubmitForm({ categories }: { categories: Category[] }) {
   const [passphrase, setPassphrase] = useState("");
+  const [contributorName, setContributorName] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]?.slug ?? "");
   const [summary, setSummary] = useState("");
@@ -44,6 +45,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           passphrase,
+          contributorName,
           title,
           category,
           summary,
@@ -104,6 +106,23 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           onChange={(e) => setPassphrase(e.target.value)}
           className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700">
+          Your name
+        </label>
+        <input
+          type="text"
+          required
+          value={contributorName}
+          onChange={(e) => setContributorName(e.target.value)}
+          placeholder="e.g. Dr. Jane Smith"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+        />
+        <p className="mt-1 text-xs text-slate-400">
+          Shown as the contributor on the published article.
+        </p>
       </div>
 
       <div>

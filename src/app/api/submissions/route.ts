@@ -6,6 +6,7 @@ type SectionInput = { heading: string; body: string[] };
 
 type RequestBody = {
   passphrase?: string;
+  contributorName?: string;
   title?: string;
   category?: string;
   summary?: string;
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Incorrect passphrase." }, { status: 401 });
   }
 
+  const contributorName = body.contributorName?.trim();
   const title = body.title?.trim();
   const category = body.category?.trim();
   const summary = body.summary?.trim();
@@ -43,9 +45,12 @@ export async function POST(request: Request) {
     }))
     .filter((s) => s.heading && s.body.length > 0);
 
-  if (!title || !category || !summary || sections.length === 0) {
+  if (!contributorName || !title || !category || !summary || sections.length === 0) {
     return NextResponse.json(
-      { error: "Title, category, summary, and at least one section are required." },
+      {
+        error:
+          "Your name, title, category, summary, and at least one section are required.",
+      },
       { status: 400 }
     );
   }
@@ -59,7 +64,14 @@ export async function POST(request: Request) {
     .map((t) => t.trim())
     .filter(Boolean);
 
-  const entry = await submitArticle({ title, category, summary, tags, sections });
+  const entry = await submitArticle({
+    contributorName,
+    title,
+    category,
+    summary,
+    tags,
+    sections,
+  });
 
   return NextResponse.json({ ok: true, id: entry.id });
 }

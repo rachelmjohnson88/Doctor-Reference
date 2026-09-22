@@ -11,6 +11,7 @@ export type Article = {
   updated: string;
   tags: string[];
   sections: Section[];
+  contributorName: string;
 };
 
 export type CategoryColor = "blue" | "rose" | "amber" | "teal";

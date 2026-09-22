@@ -12,6 +12,7 @@ export type SubmissionInput = {
   summary: string;
   tags: string[];
   sections: Section[];
+  contributorName: string;
 };
 
 export type ContributorStatus = "pending" | "approved" | "rejected";
@@ -157,6 +158,7 @@ export async function submitArticle(input: SubmissionInput): Promise<PendingArti
     summary: input.summary,
     tags: input.tags,
     sections: input.sections,
+    contributorName: input.contributorName,
     updated: new Date().toISOString().slice(0, 10),
     submittedAt: new Date().toISOString(),
   };
