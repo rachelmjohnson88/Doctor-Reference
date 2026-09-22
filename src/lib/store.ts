@@ -14,8 +14,27 @@ export type SubmissionInput = {
   sections: Section[];
 };
 
+export type ContributorStatus = "pending" | "approved" | "rejected";
+
+export type ContributorRequest = {
+  id: string;
+  name: string;
+  email: string;
+  note: string;
+  submittedAt: string;
+  status: ContributorStatus;
+  decidedAt?: string;
+};
+
+export type ContributorRequestInput = {
+  name: string;
+  email: string;
+  note: string;
+};
+
 const PUBLISHED_KEY = "surgipedia:articles:published";
 const PENDING_KEY = "surgipedia:articles:pending";
+const CONTRIBUTORS_KEY = "surgipedia:contributors";
 
 const redisUrl =
   process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
@@ -30,13 +49,19 @@ const redis = redisUrl && redisToken ? new Redis({ url: redisUrl, token: redisTo
 // Stashed on `globalThis` because Next's dev bundler can give each route
 // its own module instance, which would otherwise give each route its own
 // (empty) copy of this object.
-type MemoryStore = { published: Article[]; pending: PendingArticle[] };
-const globalForStore = globalThis as unknown as { __surgipediaMemory?: MemoryStore };
-const memory: MemoryStore =
-  globalForStore.__surgipediaMemory ?? (globalForStore.__surgipediaMemory = {
-    published: [],
-    pending: [],
-  });
+type MemoryStore = {
+  published: Article[];
+  pending: PendingArticle[];
+  contributors: ContributorRequest[];
+};
+const globalForStore = globalThis as unknown as {
+  __surgipediaMemory?: Partial<MemoryStore>;
+};
+const stashed = (globalForStore.__surgipediaMemory ??= {});
+stashed.published ??= [];
+stashed.pending ??= [];
+stashed.contributors ??= [];
+const memory = stashed as MemoryStore;
 
 async function readPublished(): Promise<Article[]> {
   if (!redis) return memory.published;
@@ -62,6 +87,19 @@ async function writePending(articles: PendingArticle[]): Promise<void> {
     return;
   }
   await redis.set(PENDING_KEY, articles);
+}
+
+async function readContributors(): Promise<ContributorRequest[]> {
+  if (!redis) return memory.contributors;
+  return (await redis.get<ContributorRequest[]>(CONTRIBUTORS_KEY)) ?? [];
+}
+
+async function writeContributors(requests: ContributorRequest[]): Promise<void> {
+  if (!redis) {
+    memory.contributors = requests;
+    return;
+  }
+  await redis.set(CONTRIBUTORS_KEY, requests);
 }
 
 function slugify(title: string): string {
@@ -153,5 +191,40 @@ export async function rejectArticle(id: string): Promise<boolean> {
   const next = pending.filter((p) => p.id !== id);
   if (next.length === pending.length) return false;
   await writePending(next);
+  return true;
+}
+
+export async function getContributorRequests(): Promise<ContributorRequest[]> {
+  return readContributors();
+}
+
+export async function submitContributorRequest(
+  input: ContributorRequestInput
+): Promise<ContributorRequest> {
+  const requests = await readContributors();
+  const entry: ContributorRequest = {
+    id: crypto.randomUUID(),
+    name: input.name,
+    email: input.email,
+    note: input.note,
+    submittedAt: new Date().toISOString(),
+    status: "pending",
+  };
+  await writeContributors([...requests, entry]);
+  return entry;
+}
+
+export async function decideContributorRequest(
+  id: string,
+  status: "approved" | "rejected"
+): Promise<boolean> {
+  const requests = await readContributors();
+  const entry = requests.find((r) => r.id === id);
+  if (!entry) return false;
+
+  const next = requests.map((r) =>
+    r.id === id ? { ...r, status, decidedAt: new Date().toISOString() } : r
+  );
+  await writeContributors(next);
   return true;
 }
