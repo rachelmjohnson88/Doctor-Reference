@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const sans = Inter({
+const sans = IBM_Plex_Sans({
   variable: "--font-sans",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
-const serif = Source_Serif_4({
+const serif = Newsreader({
   variable: "--font-serif",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
