@@ -20,7 +20,7 @@ export default async function Home() {
     <div>
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-4 py-16">
-          <p className="text-sm font-medium tracking-wide text-[#0f4c5c] uppercase">
+          <p className="font-mono text-xs tracking-wide text-[#0f4c5c] uppercase">
             By doctors, for doctors
           </p>
           <h1 className="mt-3 max-w-2xl font-serif text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
@@ -93,7 +93,7 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
+            <p className="mt-4 font-mono text-xs tracking-wide text-slate-400 uppercase">
               {articles.length} {articles.length === 1 ? "article" : "articles"}
             </p>
           </Link>
@@ -126,7 +126,7 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
+            <p className="mt-4 font-mono text-xs tracking-wide text-slate-400 uppercase">
               Reviewed before publishing
             </p>
           </Link>

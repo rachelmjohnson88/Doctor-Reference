@@ -34,7 +34,7 @@ export default async function ArticlePage({
           {category && (
             <Link
               href={`/category/${category.slug}`}
-              className="inline-flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-700"
+              className="inline-flex items-center gap-1 font-mono text-xs tracking-wide text-slate-500 uppercase hover:text-slate-700"
             >
               <span aria-hidden="true">←</span> Back
             </Link>
@@ -43,7 +43,7 @@ export default async function ArticlePage({
           {category && (
             <div className="mt-4">
               <span
-                className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${colors?.badge}`}
+                className={`inline-flex rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wide uppercase ${colors?.badge}`}
               >
                 {category.name}
               </span>
@@ -91,7 +91,7 @@ export default async function ArticlePage({
           {article.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+              className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-xs text-slate-500"
             >
               {tag}
             </span>

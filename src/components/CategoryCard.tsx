@@ -30,7 +30,7 @@ export default function CategoryCard({
           <p className="mt-1 text-sm text-slate-600">{category.description}</p>
         </div>
       </div>
-      <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
+      <p className="mt-4 font-mono text-xs tracking-wide text-slate-400 uppercase">
         {count} {count === 1 ? "article" : "articles"}
       </p>
     </Link>

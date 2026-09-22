@@ -13,7 +13,7 @@ export default function PageHeader({
     <section className="border-b border-slate-200 bg-white">
       <div className="mx-auto max-w-5xl px-4 py-10">
         {eyebrow && (
-          <p className="text-sm font-medium tracking-wide text-[#0f4c5c] uppercase">
+          <p className="font-mono text-xs tracking-wide text-[#0f4c5c] uppercase">
             {eyebrow}
           </p>
         )}

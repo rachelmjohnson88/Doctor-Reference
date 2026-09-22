@@ -23,7 +23,7 @@ export default function Header() {
             <span className="font-serif text-lg font-semibold tracking-tight text-slate-900">
               Surgipedia
             </span>
-            <span className="hidden text-sm text-slate-500 sm:inline">
+            <span className="hidden font-mono text-xs tracking-wide text-slate-500 uppercase sm:inline">
               journal &amp; exam notes
             </span>
           </span>
@@ -32,13 +32,13 @@ export default function Header() {
           <SearchBox />
           <Link
             href="/browse"
-            className="hidden text-sm font-medium text-slate-600 transition hover:text-[#0f4c5c] sm:inline"
+            className="hidden font-mono text-xs tracking-wide text-slate-600 uppercase transition hover:text-[#0f4c5c] sm:inline"
           >
             Browse
           </Link>
           <Link
             href="/submit"
-            className="rounded-md bg-[#0f4c5c] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#0b3a46]"
+            className="rounded-md bg-[#0f4c5c] px-4 py-2 font-mono text-xs tracking-wide text-white uppercase transition hover:bg-[#0b3a46]"
           >
             Submit
           </Link>

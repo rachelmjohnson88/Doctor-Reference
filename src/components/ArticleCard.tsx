@@ -16,7 +16,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       <div className="p-4">
         {category && (
           <span
-            className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${colors?.badge}`}
+            className={`inline-flex rounded-full px-2 py-0.5 font-mono text-xs tracking-wide uppercase ${colors?.badge}`}
           >
             {category.name}
           </span>
@@ -29,7 +29,7 @@ export default function ArticleCard({ article }: { article: Article }) {
           {article.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+              className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-xs text-slate-500"
             >
               {tag}
             </span>

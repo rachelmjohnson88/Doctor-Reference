@@ -11,7 +11,7 @@ export default function Footer() {
           for clinical judgment.
         </p>
 
-        <nav className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-slate-500">
+        <nav className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs tracking-wide text-slate-500 uppercase">
           <Link href="/privacy" className="hover:text-[#0f4c5c]">
             Privacy Policy
           </Link>
