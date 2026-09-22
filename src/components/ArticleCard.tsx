@@ -10,29 +10,31 @@ export default function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/article/${article.slug}`}
-      className={`group flex overflow-hidden rounded-sm border border-(--color-rule) bg-white/60 shadow-[0_1px_2px_rgba(36,31,26,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(36,31,26,0.12)] ${colors?.ring ?? ""}`}
+      className={`group block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md ${colors?.ring ?? ""}`}
     >
-      <span
-        className={`w-2 shrink-0 ${colors?.spine ?? "bg-(--color-rule)"}`}
-        aria-hidden="true"
-      />
+      <div className={`h-1 w-full ${colors?.bar ?? "bg-slate-300"}`} />
       <div className="p-4">
         {category && (
-          <p
-            className={`small-caps text-xs font-bold tracking-wide ${colors?.text}`}
+          <span
+            className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${colors?.badge}`}
           >
             {category.name}
-          </p>
+          </span>
         )}
-        <h3 className="mt-1 font-serif text-lg font-semibold text-(--color-ink) group-hover:text-(--color-brand)">
+        <h3 className="mt-2 font-serif font-semibold text-slate-900 group-hover:text-[#0f4c5c]">
           {article.title}
         </h3>
-        <p className="mt-1 text-[15px] text-(--color-ink-soft)">
-          {article.summary}
-        </p>
-        <p className="small-caps mt-3 text-xs text-(--color-ink-soft)/70">
-          {article.tags.join(" · ")}
-        </p>
+        <p className="mt-1 text-sm text-slate-600">{article.summary}</p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {article.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </Link>
   );

@@ -1,36 +1,35 @@
 import type { CategoryColor } from "./content";
 
 type ColorClasses = {
-  /** hex for inline styles where an arbitrary Tailwind class can't reach (e.g. currentColor SVGs) */
-  hex: string;
-  spine: string;
-  text: string;
+  badge: string;
+  bar: string;
+  icon: string;
   ring: string;
 };
 
 export const categoryColors: Record<CategoryColor, ColorClasses> = {
-  navy: {
-    hex: "#2c4a6e",
-    spine: "bg-[#2c4a6e]",
-    text: "text-[#2c4a6e]",
-    ring: "hover:border-[#2c4a6e]/40",
+  blue: {
+    badge: "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20",
+    bar: "bg-blue-600",
+    icon: "bg-blue-100 text-blue-700",
+    ring: "hover:ring-blue-300",
   },
-  forest: {
-    hex: "#2f5233",
-    spine: "bg-[#2f5233]",
-    text: "text-[#2f5233]",
-    ring: "hover:border-[#2f5233]/40",
+  rose: {
+    badge: "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20",
+    bar: "bg-rose-600",
+    icon: "bg-rose-100 text-rose-700",
+    ring: "hover:ring-rose-300",
   },
-  ochre: {
-    hex: "#a6752c",
-    spine: "bg-[#a6752c]",
-    text: "text-[#a6752c]",
-    ring: "hover:border-[#a6752c]/40",
+  amber: {
+    badge: "bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-600/20",
+    bar: "bg-amber-500",
+    icon: "bg-amber-100 text-amber-800",
+    ring: "hover:ring-amber-300",
   },
-  slate: {
-    hex: "#3c5a5a",
-    spine: "bg-[#3c5a5a]",
-    text: "text-[#3c5a5a]",
-    ring: "hover:border-[#3c5a5a]/40",
+  teal: {
+    badge: "bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-600/20",
+    bar: "bg-teal-600",
+    icon: "bg-teal-100 text-teal-700",
+    ring: "hover:ring-teal-300",
   },
 };

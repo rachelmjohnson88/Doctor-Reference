@@ -30,60 +30,53 @@ export default async function ArticlePage({
 
   return (
     <div>
-      <section className="border-b border-(--color-rule) bg-(--color-page-deep)">
+      <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-10">
           {category && (
             <Link
               href={`/category/${category.slug}`}
-              className="small-caps inline-flex items-center gap-1 text-xs font-bold tracking-wide text-(--color-ink-soft) hover:text-(--color-brand)"
+              className="inline-flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-700"
             >
-              <span aria-hidden="true">←</span> Back to {category.name}
+              <span aria-hidden="true">←</span> Back
             </Link>
           )}
 
           {category && (
-            <p
-              className={`small-caps mt-5 text-sm font-bold tracking-wide ${colors?.text}`}
-            >
-              {category.name}
-            </p>
+            <div className="mt-4">
+              <span
+                className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${colors?.badge}`}
+              >
+                {category.name}
+              </span>
+            </div>
           )}
 
-          <h1 className="mt-1 font-serif text-4xl font-semibold tracking-tight text-(--color-ink)">
+          <h1 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-slate-900">
             {article.title}
           </h1>
-          <div
-            className="my-5 h-px w-16 bg-(--color-gold)"
-            aria-hidden="true"
-          />
-          <p className="max-w-xl text-lg text-(--color-ink-soft)">
-            {article.summary}
-          </p>
-          <p className="small-caps mt-4 text-xs text-(--color-ink-soft)/70">
-            Last Updated {article.updated}
+          <p className="mt-3 text-lg text-slate-600">{article.summary}</p>
+          <p className="mt-2 text-xs text-slate-400">
+            Last updated {article.updated}
           </p>
         </div>
       </section>
 
       <div className="mx-auto max-w-3xl px-4 py-10">
-        <div className="divide-y divide-(--color-rule) border-y border-(--color-rule)">
+        <div className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white shadow-sm">
           {article.sections.map((section) => (
-            <section key={section.heading} className="py-7">
-              <h2 className="small-caps text-base font-bold tracking-wide text-(--color-ink)">
+            <section key={section.heading} className="p-6 sm:p-8">
+              <h2 className="flex items-center gap-2 font-serif text-lg font-semibold text-slate-900">
+                <span
+                  className={`h-4 w-1 rounded-full ${colors?.bar ?? "bg-slate-300"}`}
+                  aria-hidden="true"
+                />
                 {section.heading}
               </h2>
-              <div
-                className="mt-2 mb-4 h-px w-10 bg-(--color-gold)"
-                aria-hidden="true"
-              />
-              <ul className="space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {section.body.map((line, i) => (
-                  <li
-                    key={i}
-                    className="flex gap-3 text-[17px] leading-relaxed text-(--color-ink)"
-                  >
+                  <li key={i} className="flex gap-2.5 text-slate-700">
                     <span
-                      className={`mt-2.5 h-[5px] w-[5px] shrink-0 rounded-full ${colors?.spine ?? "bg-(--color-rule)"}`}
+                      className={`mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full ${colors?.bar ?? "bg-slate-300"}`}
                       aria-hidden="true"
                     />
                     <span>{line}</span>
@@ -94,9 +87,16 @@ export default async function ArticlePage({
           ))}
         </div>
 
-        <p className="small-caps mt-8 text-xs text-(--color-ink-soft)/70">
-          {article.tags.join(" · ")}
-        </p>
+        <div className="mt-8 flex flex-wrap gap-1.5">
+          {article.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

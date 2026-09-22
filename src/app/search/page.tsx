@@ -20,7 +20,7 @@ export default async function SearchPage({
 
       <div className="mx-auto max-w-5xl px-4 py-10">
         {query && (
-          <p className="text-sm text-(--color-ink-soft)">
+          <p className="text-sm text-slate-600">
             {results.length} {results.length === 1 ? "result" : "results"} for
             &ldquo;{query}&rdquo;
           </p>
@@ -33,9 +33,7 @@ export default async function SearchPage({
         </div>
 
         {query && results.length === 0 && (
-          <p className="mt-6 text-(--color-ink-soft)">
-            No articles matched your search.
-          </p>
+          <p className="mt-6 text-slate-500">No articles matched your search.</p>
         )}
       </div>
     </div>
