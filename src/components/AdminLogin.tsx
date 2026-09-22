@@ -40,13 +40,13 @@ export default function AdminLogin() {
         required
         value={passphrase}
         onChange={(e) => setPassphrase(e.target.value)}
-        className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+        className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
       />
       {error && <p className="text-sm text-red-600">{error}</p>}
       <button
         type="submit"
         disabled={loading}
-        className="rounded-md bg-[#0f4c5c] px-4 py-2 text-sm font-medium text-white hover:bg-[#0b3a46] disabled:opacity-50"
+        className="rounded-md bg-(--color-accent) px-4 py-2 text-sm font-medium text-white hover:brightness-90 disabled:opacity-50"
       >
         {loading ? "Checking…" : "Log in"}
       </button>

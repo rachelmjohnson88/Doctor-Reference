@@ -1,5 +1,5 @@
 import { searchPublished } from "@/lib/store";
-import ArticleCard from "@/components/ArticleCard";
+import ArticleRow from "@/components/ArticleRow";
 import SearchBox from "@/components/SearchBox";
 import PageHeader from "@/components/PageHeader";
 
@@ -20,22 +20,24 @@ export default async function SearchPage({
         </div>
       </PageHeader>
 
-      <div className="mx-auto max-w-5xl px-4 py-10">
+      <div className="mx-auto max-w-3xl px-4 py-10">
         {query && (
-          <p className="text-sm text-slate-600">
+          <p className="font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
             {results.length} {results.length === 1 ? "result" : "results"} for
             &ldquo;{query}&rdquo;
           </p>
         )}
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4">
           {results.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
+            <ArticleRow key={article.slug} article={article} />
           ))}
         </div>
 
         {query && results.length === 0 && (
-          <p className="mt-6 text-slate-500">No articles matched your search.</p>
+          <p className="mt-6 text-(--color-ink-soft)">
+            No articles matched your search.
+          </p>
         )}
       </div>
     </div>

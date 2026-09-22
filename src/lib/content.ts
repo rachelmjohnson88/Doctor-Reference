@@ -15,39 +15,32 @@ export type Article = {
   contributorCredentials: string;
 };
 
-export type CategoryColor = "blue" | "rose" | "amber" | "teal";
-
 export type Category = {
   slug: string;
   name: string;
   description: string;
-  color: CategoryColor;
 };
 
 export const categories: Category[] = [
   {
     slug: "perioperative",
     name: "Perioperative Care",
-    description: "Pre-op assessment, optimization, and post-op recovery.",
-    color: "blue",
+    description: "Pre-operative assessment, optimization, and post-operative recovery.",
   },
   {
     slug: "critical-care",
     name: "Critical Care",
     description: "Scoring systems and criteria used in the ICU and on the wards.",
-    color: "rose",
   },
   {
     slug: "emergency",
     name: "Emergency Medicine",
-    description: "Rapid-assessment tools for triage and acute presentations.",
-    color: "amber",
+    description: "Acute assessment and emergency management.",
   },
   {
     slug: "general-surgery",
     name: "General Surgery",
     description: "Classification systems and staging used day to day in surgery.",
-    color: "teal",
   },
 ];
 

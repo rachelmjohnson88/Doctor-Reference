@@ -122,7 +122,7 @@ export default function TermsPage() {
             Questions about these terms? Contact us at{" "}
             <a
               href="mailto:[CONTACT EMAIL]"
-              className="text-[#0f4c5c] underline underline-offset-4"
+              className="text-(--color-accent) underline underline-offset-4"
             >
               [CONTACT EMAIL]
             </a>

@@ -3,7 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function SearchBox({ initialQuery = "" }: { initialQuery?: string }) {
+export default function SearchBox({
+  initialQuery = "",
+  size = "compact",
+  placeholder = "Search conditions, scores, protocols…",
+}: {
+  initialQuery?: string;
+  size?: "compact" | "large";
+  placeholder?: string;
+}) {
   const [query, setQuery] = useState(initialQuery);
   const router = useRouter();
 
@@ -15,19 +23,23 @@ export default function SearchBox({ initialQuery = "" }: { initialQuery?: string
     }
   }
 
+  const large = size === "large";
+
   return (
-    <form onSubmit={handleSubmit} className="relative w-full max-w-xs">
+    <form onSubmit={handleSubmit} className={`relative w-full ${large ? "" : "max-w-xs"}`}>
       <label htmlFor="site-search" className="sr-only">
-        Search reference articles
+        Search the library
       </label>
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth={2}
+        strokeWidth={1.75}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-(--color-ink-soft) ${
+          large ? "left-4 h-5 w-5" : "left-2.5 h-4 w-4"
+        }`}
         aria-hidden="true"
       >
         <circle cx="11" cy="11" r="7" />
@@ -38,8 +50,12 @@ export default function SearchBox({ initialQuery = "" }: { initialQuery?: string
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search conditions, scores, protocols…"
-        className="w-full rounded-md border border-slate-300 bg-slate-50 py-1.5 pr-3 pl-8 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0f4c5c] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+        placeholder={placeholder}
+        className={
+          large
+            ? "w-full border border-(--color-rule) bg-white py-4 pr-4 pl-12 text-base text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none"
+            : "w-full rounded-sm border border-(--color-rule) bg-white py-1.5 pr-3 pl-8 text-sm text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none"
+        }
       />
     </form>
   );

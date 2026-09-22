@@ -125,6 +125,27 @@ export async function getPublishedArticles(): Promise<Article[]> {
   return readPublished();
 }
 
+export async function getLatestArticles(limit: number): Promise<Article[]> {
+  const articles = await readPublished();
+  return [...articles]
+    .sort((a, b) => b.updated.localeCompare(a.updated))
+    .slice(0, limit);
+}
+
+export async function getPopularTags(limit: number): Promise<string[]> {
+  const articles = await readPublished();
+  const counts = new Map<string, number>();
+  for (const article of articles) {
+    for (const tag of article.tags) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([tag]) => tag);
+}
+
 export async function getPublishedArticle(slug: string): Promise<Article | undefined> {
   const articles = await readPublished();
   return articles.find((a) => a.slug === slug);

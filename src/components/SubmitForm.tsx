@@ -106,7 +106,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           required
           value={passphrase}
           onChange={(e) => setPassphrase(e.target.value)}
-          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
       </div>
 
@@ -120,7 +120,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           value={contributorName}
           onChange={(e) => setContributorName(e.target.value)}
           placeholder="e.g. Dr. Jane Smith"
-          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
         <p className="mt-1 text-xs text-slate-400">
           Shown as the contributor on the published article.
@@ -137,7 +137,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           value={contributorCredentials}
           onChange={(e) => setContributorCredentials(e.target.value)}
           placeholder="e.g. MD, FACS — Vascular Surgery"
-          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
       </div>
 
@@ -149,7 +149,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. Ranson's Criteria for Acute Pancreatitis"
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
       </div>
 
@@ -160,7 +160,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         >
           {categories.map((c) => (
             <option key={c.slug} value={c.slug}>
@@ -180,7 +180,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           placeholder="One or two sentences describing what this article covers."
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
       </div>
 
@@ -193,7 +193,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           placeholder="e.g. pancreatitis, scoring, gi"
-          className="mt-1 w-full max-w-md rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+          className="mt-1 w-full max-w-md rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         />
       </div>
 
@@ -226,7 +226,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
               value={section.heading}
               onChange={(e) => updateSection(i, { heading: e.target.value })}
               placeholder="Section heading, e.g. Criteria"
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
             />
             <textarea
               required
@@ -234,14 +234,14 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
               value={section.bodyText}
               onChange={(e) => updateSection(i, { bodyText: e.target.value })}
               placeholder={"One point per line, e.g.\nAge > 55 years\nWBC > 16,000/mm³"}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
             />
           </div>
         ))}
         <button
           type="button"
           onClick={addSection}
-          className="text-sm font-medium text-[#0f4c5c] hover:text-[#0b3a46]"
+          className="text-sm font-medium text-(--color-accent) hover:opacity-80"
         >
           + Add another section
         </button>
@@ -254,7 +254,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="rounded-md bg-[#0f4c5c] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0b3a46] disabled:opacity-50"
+        className="rounded-md bg-(--color-accent) px-5 py-2.5 text-sm font-medium text-white hover:brightness-90 disabled:opacity-50"
       >
         {status === "submitting" ? "Submitting…" : "Submit for review"}
       </button>

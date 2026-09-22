@@ -19,7 +19,7 @@ export default function SubmitPage() {
           Don&apos;t have an access code?{" "}
           <Link
             href="/contribute"
-            className="font-medium text-[#0f4c5c] underline underline-offset-4 hover:text-[#0b3a46]"
+            className="font-medium text-(--color-accent) underline underline-offset-4 hover:opacity-80"
           >
             Request contributor access
           </Link>

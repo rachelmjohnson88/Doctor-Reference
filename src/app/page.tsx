@@ -1,13 +1,22 @@
 import Link from "next/link";
 import { getAllCategories } from "@/lib/content";
-import { getPublishedArticles, getPublishedByCategory } from "@/lib/store";
-import CategoryCard from "@/components/CategoryCard";
+import {
+  getLatestArticles,
+  getPopularTags,
+  getPublishedByCategory,
+} from "@/lib/store";
+import SearchBox from "@/components/SearchBox";
+import ArticleRow from "@/components/ArticleRow";
+import SpecialtyRow from "@/components/SpecialtyRow";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const categories = getAllCategories();
-  const articles = await getPublishedArticles();
+  const [latest, popularTags] = await Promise.all([
+    getLatestArticles(4),
+    getPopularTags(6),
+  ]);
   const counts = await Promise.all(
     categories.map(async (category) => ({
       slug: category.slug,
@@ -18,120 +27,98 @@ export default async function Home() {
 
   return (
     <div>
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-16">
-          <p className="font-mono text-xs tracking-wide text-[#0f4c5c] uppercase">
-            By doctors, for doctors
-          </p>
-          <h1 className="mt-3 max-w-2xl font-serif text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-            A place for doctors to publish and learn.
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-slate-600">
-            Clinical articles, case reviews, and exam notes — written and
-            reviewed by doctors, organized for fast reading and revision.
-          </p>
+      <section className="mx-auto max-w-3xl px-4 pt-14 pb-10 text-center">
+        <p className="font-mono text-xs tracking-wide text-(--color-accent) uppercase">
+          Surgipedia
+        </p>
+        <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-(--color-ink)">
+          Clinical knowledge, written by doctors.
+        </h1>
+        <p className="mx-auto mt-3 max-w-xl text-(--color-ink-soft)">
+          A growing clinical library of articles, case reviews, protocols,
+          scores, and exam resources — written and reviewed by doctors.
+        </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-slate-500">
-            <span>
-              <span className="font-semibold text-slate-900">{articles.length}</span>{" "}
-              published articles
-            </span>
-            <span>
-              <span className="font-semibold text-slate-900">
-                {categories.length}
-              </span>{" "}
-              specialty areas
-            </span>
-          </div>
+        <div className="mx-auto mt-6 max-w-xl">
+          <SearchBox size="large" />
+        </div>
+
+        {popularTags.length > 0 && (
+          <p className="mt-3 font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
+            Popular: {popularTags.join(" · ")}
+          </p>
+        )}
+      </section>
+
+      <section className="border-t border-(--color-rule) bg-(--color-page-alt)">
+        <div className="mx-auto max-w-3xl px-4 py-12">
+          <h2 className="font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
+            Latest
+          </h2>
+
+          {latest.length > 0 ? (
+            <div className="mt-4">
+              {latest.map((article, i) => (
+                <ArticleRow key={article.slug} article={article} featured={i === 0} />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-4 text-(--color-ink-soft)">
+              No articles have been published yet.{" "}
+              <Link
+                href="/submit"
+                className="text-(--color-accent) underline underline-offset-4 hover:text-(--color-ink)"
+              >
+                Be the first to contribute →
+              </Link>
+            </p>
+          )}
         </div>
       </section>
 
-      <div className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="font-serif text-xl font-semibold text-slate-900">
-          Browse by area
-        </h2>
+      <section className="mx-auto max-w-3xl px-4 py-12">
+        <div className="flex items-baseline justify-between">
+          <h2 className="font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
+            Browse by specialty
+          </h2>
+          <Link
+            href="/browse"
+            className="font-mono text-xs tracking-wide text-(--color-accent) uppercase hover:text-(--color-ink)"
+          >
+            View all articles →
+          </Link>
+        </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4">
           {categories.map((category) => (
-            <CategoryCard
+            <SpecialtyRow
               key={category.slug}
               category={category}
               count={countBySlug[category.slug] ?? 0}
             />
           ))}
         </div>
+      </section>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/browse"
-            className="group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md hover:ring-slate-300"
-          >
-            <div className="flex items-start gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.75}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4.5 w-4.5"
-                  aria-hidden="true"
-                >
-                  <rect x="3" y="3" width="7" height="7" rx="1" />
-                  <rect x="14" y="3" width="7" height="7" rx="1" />
-                  <rect x="3" y="14" width="7" height="7" rx="1" />
-                  <rect x="14" y="14" width="7" height="7" rx="1" />
-                </svg>
-              </span>
-              <div>
-                <h3 className="font-serif font-semibold text-slate-900">
-                  Browse all articles
-                </h3>
-                <p className="mt-1 text-sm text-slate-600">
-                  See every published article across all areas.
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 font-mono text-xs tracking-wide text-slate-400 uppercase">
-              {articles.length} {articles.length === 1 ? "article" : "articles"}
+      <section className="border-t border-(--color-rule) bg-(--color-page-alt)">
+        <div className="mx-auto flex max-w-3xl flex-col items-start gap-3 px-4 py-10 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="font-serif text-lg font-semibold text-(--color-ink)">
+              Have something to share?
+            </h2>
+            <p className="mt-1 text-sm text-(--color-ink-soft)">
+              Articles, case reviews, protocols, and exam notes are reviewed
+              before publishing.
             </p>
-          </Link>
-
+          </div>
           <Link
             href="/submit"
-            className="group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md hover:ring-[#0f4c5c]/30"
+            className="shrink-0 font-mono text-xs tracking-wide text-(--color-accent) uppercase hover:text-(--color-ink)"
           >
-            <div className="flex items-start gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0f4c5c]/10 text-[#0f4c5c]">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.75}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4.5 w-4.5"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </span>
-              <div>
-                <h3 className="font-serif font-semibold text-slate-900">
-                  Submit an article
-                </h3>
-                <p className="mt-1 text-sm text-slate-600">
-                  Contribute a clinical article, case review, or exam note.
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 font-mono text-xs tracking-wide text-slate-400 uppercase">
-              Reviewed before publishing
-            </p>
+            Submit article →
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

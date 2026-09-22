@@ -1,11 +1,11 @@
 import { getPublishedArticles } from "@/lib/store";
-import ArticleCard from "@/components/ArticleCard";
+import ArticleRow from "@/components/ArticleRow";
 import PageHeader from "@/components/PageHeader";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Browse — Surgipedia",
+  title: "Articles — Surgipedia",
 };
 
 export default async function BrowsePage() {
@@ -16,18 +16,20 @@ export default async function BrowsePage() {
       <PageHeader
         eyebrow="Library"
         title="All articles"
-        description={`${articles.length} published articles`}
+        description={`${articles.length} published ${articles.length === 1 ? "article" : "articles"}`}
       />
 
-      <div className="mx-auto max-w-5xl px-4 py-10">
+      <div className="mx-auto max-w-3xl px-4 py-10">
         {articles.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div>
             {articles.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
+              <ArticleRow key={article.slug} article={article} />
             ))}
           </div>
         ) : (
-          <p className="text-slate-500">No articles have been published yet.</p>
+          <p className="text-(--color-ink-soft)">
+            No articles have been published yet.
+          </p>
         )}
       </div>
     </div>

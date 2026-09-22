@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --color-page: #f7f8f6;
-  --color-ink: #16232e;
+  --color-page: #faf8f5;
+  --color-page-alt: #eff1f2;
+  --color-ink: #14233a;
+  --color-ink-soft: #55606e;
+  --color-accent: #2c6b63;
+  --color-rule: #e1e0dc;
 }
 
 @theme inline {
