@@ -29,7 +29,7 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="mx-auto grid max-w-5xl gap-10 px-4 pt-12 pb-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <section className="mx-auto grid max-w-5xl gap-10 px-4 pt-12 pb-16 md:grid-cols-[1.1fr_0.9fr] md:gap-12 lg:gap-16">
         <div>
           <p className="font-mono text-xs tracking-wide text-(--color-accent) uppercase">
             By doctors, for doctors
@@ -37,7 +37,7 @@ export default async function Home() {
           <h1 className="mt-3 font-serif text-5xl leading-[1.05] font-semibold tracking-tight text-(--color-ink) sm:text-6xl">
             Real knowledge
             <br />
-            for <em className="text-(--color-accent) italic">real</em> care.
+            for <span className="text-(--color-accent)">real</span> care.
           </h1>
           <p className="mt-5 max-w-md text-(--color-ink-soft)">
             Evidence-based articles, case reviews, protocols, scores, and
@@ -56,7 +56,7 @@ export default async function Home() {
           )}
         </div>
 
-        <AnatomicalFigure className="hidden lg:block" />
+        <AnatomicalFigure className="mx-auto w-full max-w-xs md:mx-0 md:max-w-none" />
       </section>
 
       {/* Specialty cards */}
