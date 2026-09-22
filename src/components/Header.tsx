@@ -28,16 +28,20 @@ export default function Header() {
             </span>
           </span>
         </Link>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <SearchBox />
-          <nav className="hidden text-sm font-medium text-slate-600 sm:flex sm:gap-5">
-            <Link href="/browse" className="transition hover:text-[#0f4c5c]">
-              Browse
-            </Link>
-            <Link href="/submit" className="transition hover:text-[#0f4c5c]">
-              Submit
-            </Link>
-          </nav>
+          <Link
+            href="/browse"
+            className="hidden text-sm font-medium text-slate-600 transition hover:text-[#0f4c5c] sm:inline"
+          >
+            Browse
+          </Link>
+          <Link
+            href="/submit"
+            className="rounded-md bg-[#0f4c5c] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#0b3a46]"
+          >
+            Submit
+          </Link>
         </div>
       </div>
     </header>
