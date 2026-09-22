@@ -18,9 +18,9 @@ export default function PrivacyPage() {
           <p className="mt-2">
             This policy explains what information Surgipedia (&ldquo;the
             site&rdquo;, &ldquo;we&rdquo;) collects, why, and how it&apos;s
-            used. Surgipedia is a reference site for clinical scoring
-            systems, classifications, and protocols. Most of the site is
-            publicly readable and doesn&apos;t require an account.
+            used. Surgipedia is a platform for doctors to publish and read
+            clinical articles, case reviews, and exam notes. Most of the
+            site is publicly readable and doesn&apos;t require an account.
           </p>
         </section>
 

@@ -26,9 +26,10 @@ export default function TermsPage() {
             Not medical advice
           </h2>
           <p className="mt-2">
-            Content on this site is a quick reference summarizing scoring
-            systems, classifications, and protocols. It is provided for
-            informational purposes only, is not a substitute for
+            Content on this site consists of clinical articles, case
+            reviews, and exam notes contributed by doctors. It is provided
+            for informational and educational purposes only, is not a
+            substitute for
             professional clinical judgment, and should always be verified
             against your institution&apos;s current protocols and primary
             literature before being applied to patient care. We make no

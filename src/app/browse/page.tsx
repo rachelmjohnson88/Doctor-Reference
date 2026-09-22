@@ -16,7 +16,7 @@ export default async function BrowsePage() {
       <PageHeader
         eyebrow="Library"
         title="All articles"
-        description={`${articles.length} reference articles`}
+        description={`${articles.length} published articles`}
       />
 
       <div className="mx-auto max-w-5xl px-4 py-10">

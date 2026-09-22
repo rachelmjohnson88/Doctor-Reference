@@ -15,8 +15,9 @@ const serif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Surgipedia — clinical reference",
-  description: "A quick-reference site for doctors: scoring systems, protocols, and classifications.",
+  title: "Surgipedia — journal & exam notes",
+  description:
+    "A place for doctors to publish and read clinical articles, case reviews, and exam notes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

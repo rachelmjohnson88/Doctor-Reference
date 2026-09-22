@@ -21,20 +21,20 @@ export default async function Home() {
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-4 py-16">
           <p className="text-sm font-medium tracking-wide text-[#0f4c5c] uppercase">
-            Clinical quick reference
+            By doctors, for doctors
           </p>
           <h1 className="mt-3 max-w-2xl font-serif text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-            Evidence-based answers, at the point of care.
+            A place for doctors to publish and learn.
           </h1>
           <p className="mt-4 max-w-xl text-lg text-slate-600">
-            Scoring systems, classifications, and protocols — organized for
-            fast lookup on the ward, in clinic, or before the case.
+            Clinical articles, case reviews, and exam notes — written and
+            reviewed by doctors, organized for fast reading and revision.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-slate-500">
             <span>
               <span className="font-semibold text-slate-900">{articles.length}</span>{" "}
-              reference articles
+              published articles
             </span>
             <span>
               <span className="font-semibold text-slate-900">

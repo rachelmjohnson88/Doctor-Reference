@@ -24,7 +24,7 @@ export default function Header() {
               Surgipedia
             </span>
             <span className="hidden text-sm text-slate-500 sm:inline">
-              clinical reference
+              journal &amp; exam notes
             </span>
           </span>
         </Link>
