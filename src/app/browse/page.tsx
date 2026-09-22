@@ -1,13 +1,15 @@
-import { getAllArticles } from "@/lib/content";
+import { getPublishedArticles } from "@/lib/store";
 import ArticleCard from "@/components/ArticleCard";
 import PageHeader from "@/components/PageHeader";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Browse — Surgipedia",
 };
 
-export default function BrowsePage() {
-  const articles = getAllArticles();
+export default async function BrowsePage() {
+  const articles = await getPublishedArticles();
 
   return (
     <div>
@@ -18,11 +20,15 @@ export default function BrowsePage() {
       />
 
       <div className="mx-auto max-w-5xl px-4 py-10">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
+        {articles.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {articles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-slate-500">No articles have been published yet.</p>
+        )}
       </div>
     </div>
   );

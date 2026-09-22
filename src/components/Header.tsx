@@ -34,6 +34,9 @@ export default function Header() {
             <Link href="/browse" className="transition hover:text-[#0f4c5c]">
               Browse
             </Link>
+            <Link href="/submit" className="transition hover:text-[#0f4c5c]">
+              Submit
+            </Link>
           </nav>
         </div>
       </div>

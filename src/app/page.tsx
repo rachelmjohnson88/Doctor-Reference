@@ -1,10 +1,20 @@
 import Link from "next/link";
-import { getAllArticles, getAllCategories, getArticlesByCategory } from "@/lib/content";
+import { getAllCategories } from "@/lib/content";
+import { getPublishedArticles, getPublishedByCategory } from "@/lib/store";
 import CategoryCard from "@/components/CategoryCard";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
   const categories = getAllCategories();
-  const articleCount = getAllArticles().length;
+  const articles = await getPublishedArticles();
+  const counts = await Promise.all(
+    categories.map(async (category) => ({
+      slug: category.slug,
+      count: (await getPublishedByCategory(category.slug)).length,
+    }))
+  );
+  const countBySlug = Object.fromEntries(counts.map((c) => [c.slug, c.count]));
 
   return (
     <div>
@@ -23,7 +33,7 @@ export default function Home() {
 
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-slate-500">
             <span>
-              <span className="font-semibold text-slate-900">{articleCount}</span>{" "}
+              <span className="font-semibold text-slate-900">{articles.length}</span>{" "}
               reference articles
             </span>
             <span>
@@ -46,10 +56,22 @@ export default function Home() {
             <CategoryCard
               key={category.slug}
               category={category}
-              count={getArticlesByCategory(category.slug).length}
+              count={countBySlug[category.slug] ?? 0}
             />
           ))}
         </div>
+
+        {articles.length === 0 && (
+          <p className="mt-8 text-sm text-slate-500">
+            No articles have been published yet.{" "}
+            <Link
+              href="/submit"
+              className="font-medium text-[#0f4c5c] underline underline-offset-4 hover:text-[#0b3a46]"
+            >
+              Submit the first one →
+            </Link>
+          </p>
+        )}
 
         <div className="mt-10">
           <Link

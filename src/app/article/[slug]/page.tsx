@@ -1,17 +1,16 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllArticles, getArticle, getCategory } from "@/lib/content";
+import { getCategory } from "@/lib/content";
+import { getPublishedArticle } from "@/lib/store";
 import { categoryColors } from "@/lib/theme";
 
-export function generateStaticParams() {
-  return getAllArticles().map((article) => ({ slug: article.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: PageProps<"/article/[slug]">) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const article = await getPublishedArticle(slug);
   return { title: article ? `${article.title} — Surgipedia` : "Surgipedia" };
 }
 
@@ -19,7 +18,7 @@ export default async function ArticlePage({
   params,
 }: PageProps<"/article/[slug]">) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const article = await getPublishedArticle(slug);
 
   if (!article) {
     notFound();

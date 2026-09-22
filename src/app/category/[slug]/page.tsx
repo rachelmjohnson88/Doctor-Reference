@@ -1,15 +1,10 @@
 import { notFound } from "next/navigation";
-import {
-  getAllCategories,
-  getArticlesByCategory,
-  getCategory,
-} from "@/lib/content";
+import { getCategory } from "@/lib/content";
+import { getPublishedByCategory } from "@/lib/store";
 import ArticleCard from "@/components/ArticleCard";
 import PageHeader from "@/components/PageHeader";
 
-export function generateStaticParams() {
-  return getAllCategories().map((category) => ({ slug: category.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({
   params,
@@ -21,7 +16,7 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const articles = getArticlesByCategory(slug);
+  const articles = await getPublishedByCategory(slug);
 
   return (
     <div>
@@ -32,11 +27,17 @@ export default async function CategoryPage({
       />
 
       <div className="mx-auto max-w-5xl px-4 py-10">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
+        {articles.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {articles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-slate-500">
+            No articles have been published in this area yet.
+          </p>
+        )}
       </div>
     </div>
   );
