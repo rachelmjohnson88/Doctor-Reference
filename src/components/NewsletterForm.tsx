@@ -39,13 +39,13 @@ export default function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
-        className="w-full border border-white/20 bg-transparent px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-(--color-accent) focus:outline-none"
+        className="w-full rounded-md border border-white/20 bg-transparent px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-(--color-accent) focus:outline-none"
       />
       <button
         type="submit"
         disabled={status === "submitting"}
         aria-label="Subscribe"
-        className="shrink-0 border border-white/20 px-3 py-2 text-white transition hover:border-(--color-accent) hover:text-(--color-accent) disabled:opacity-50"
+        className="shrink-0 rounded-md border border-white/20 px-3 py-2 text-white transition hover:border-(--color-accent) hover:text-(--color-accent) disabled:opacity-50"
       >
         <svg
           viewBox="0 0 24 24"

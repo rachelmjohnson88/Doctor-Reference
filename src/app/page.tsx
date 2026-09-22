@@ -6,8 +6,8 @@ import {
   getPublishedByCategory,
 } from "@/lib/store";
 import SearchBox from "@/components/SearchBox";
-import ArticleRow from "@/components/ArticleRow";
-import SpecialtyRow from "@/components/SpecialtyRow";
+import ArticleCard from "@/components/ArticleCard";
+import CategoryCard from "@/components/CategoryCard";
 import AnatomicalFigure from "@/components/AnatomicalFigure";
 
 export const dynamic = "force-dynamic";
@@ -59,12 +59,12 @@ export default async function Home() {
         <AnatomicalFigure className="hidden lg:block" />
       </section>
 
-      {/* Specialty index */}
+      {/* Specialty cards */}
       <section className="border-t border-(--color-rule)">
-        <div className="mx-auto max-w-3xl px-4 py-12">
+        <div className="mx-auto max-w-5xl px-4 py-12">
           <div className="flex items-baseline justify-between">
-            <h2 className="font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
-              Index — Specialties
+            <h2 className="font-serif text-xl font-semibold text-(--color-ink)">
+              Browse by specialty
             </h2>
             <Link
               href="/browse"
@@ -74,13 +74,12 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="mt-2">
-            {categories.map((category, i) => (
-              <SpecialtyRow
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {categories.map((category) => (
+              <CategoryCard
                 key={category.slug}
                 category={category}
                 count={countBySlug[category.slug] ?? 0}
-                index={i}
               />
             ))}
           </div>
@@ -89,11 +88,11 @@ export default async function Home() {
 
       {/* Latest / launch state */}
       <section className="border-t border-(--color-rule) bg-(--color-page-alt)">
-        <div className="mx-auto max-w-3xl px-4 py-12">
+        <div className="mx-auto max-w-5xl px-4 py-12">
           {latest.length > 0 ? (
             <>
               <div className="flex items-baseline justify-between">
-                <h2 className="font-mono text-xs tracking-wide text-(--color-ink-soft) uppercase">
+                <h2 className="font-serif text-xl font-semibold text-(--color-ink)">
                   Latest
                 </h2>
                 <Link
@@ -103,9 +102,9 @@ export default async function Home() {
                   View all →
                 </Link>
               </div>
-              <div className="mt-2">
-                {latest.map((article, i) => (
-                  <ArticleRow key={article.slug} article={article} featured={i === 0} />
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {latest.map((article) => (
+                  <ArticleCard key={article.slug} article={article} />
                 ))}
               </div>
             </>
@@ -123,7 +122,7 @@ export default async function Home() {
               </p>
               <Link
                 href="/submit"
-                className="mt-5 inline-block bg-(--color-ink) px-5 py-2.5 font-mono text-xs tracking-wide text-white uppercase transition hover:bg-(--color-accent)"
+                className="mt-5 inline-block rounded-md bg-(--color-accent) px-5 py-2.5 font-mono text-xs tracking-wide text-white uppercase transition hover:brightness-90"
               >
                 Be the first to contribute →
               </Link>
@@ -134,7 +133,7 @@ export default async function Home() {
 
       {/* Submission CTA */}
       <section className="border-t border-(--color-rule)">
-        <div className="mx-auto max-w-3xl px-4 py-14">
+        <div className="mx-auto max-w-5xl px-4 py-14">
           <p className="font-mono text-xs tracking-wide text-(--color-accent) uppercase">
             Contribute
           </p>
@@ -149,7 +148,7 @@ export default async function Home() {
           </p>
           <Link
             href="/submit"
-            className="mt-5 inline-block border border-(--color-ink) px-5 py-2.5 font-mono text-xs tracking-wide text-(--color-ink) uppercase transition hover:border-(--color-accent) hover:text-(--color-accent)"
+            className="mt-5 inline-block rounded-md border border-(--color-ink) px-5 py-2.5 font-mono text-xs tracking-wide text-(--color-ink) uppercase transition hover:border-(--color-accent) hover:text-(--color-accent)"
           >
             Submit an article →
           </Link>

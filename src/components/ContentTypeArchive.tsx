@@ -1,6 +1,6 @@
 import { getContentType } from "@/lib/content";
 import { getPublishedByType } from "@/lib/store";
-import ArticleRow from "@/components/ArticleRow";
+import ArticleCard from "@/components/ArticleCard";
 import PageHeader from "@/components/PageHeader";
 import { notFound } from "next/navigation";
 
@@ -17,11 +17,11 @@ export default async function ContentTypeArchive({ typeSlug }: { typeSlug: strin
         title={contentType.plural}
         description={contentType.description}
       />
-      <div className="mx-auto max-w-3xl px-4 py-10">
+      <div className="mx-auto max-w-5xl px-4 py-10">
         {articles.length > 0 ? (
-          <div>
+          <div className="grid gap-4 sm:grid-cols-2">
             {articles.map((article) => (
-              <ArticleRow key={article.slug} article={article} />
+              <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
         ) : (

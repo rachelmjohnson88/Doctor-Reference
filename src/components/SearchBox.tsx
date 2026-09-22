@@ -53,8 +53,8 @@ export default function SearchBox({
         placeholder={placeholder}
         className={
           large
-            ? "w-full border border-(--color-rule) bg-white py-4 pr-4 pl-12 text-base text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none"
-            : "w-full rounded-sm border border-(--color-rule) bg-white py-1.5 pr-3 pl-8 text-sm text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none"
+            ? "w-full rounded-lg border border-(--color-rule) bg-white py-4 pr-4 pl-12 text-base text-(--color-ink) shadow-sm placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
+            : "w-full rounded-md border border-(--color-rule) bg-white py-1.5 pr-3 pl-8 text-sm text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-accent) focus:outline-none focus:ring-1 focus:ring-(--color-accent)"
         }
       />
     </form>

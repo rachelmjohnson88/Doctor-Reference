@@ -1,11 +1,11 @@
 import { getPublishedArticles } from "@/lib/store";
-import ArticleRow from "@/components/ArticleRow";
+import ArticleCard from "@/components/ArticleCard";
 import PageHeader from "@/components/PageHeader";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Articles — Surgipedia",
+  title: "All articles — Surgipedia",
 };
 
 export default async function BrowsePage() {
@@ -19,11 +19,11 @@ export default async function BrowsePage() {
         description={`${articles.length} published ${articles.length === 1 ? "article" : "articles"}`}
       />
 
-      <div className="mx-auto max-w-3xl px-4 py-10">
+      <div className="mx-auto max-w-5xl px-4 py-10">
         {articles.length > 0 ? (
-          <div>
+          <div className="grid gap-4 sm:grid-cols-2">
             {articles.map((article) => (
-              <ArticleRow key={article.slug} article={article} />
+              <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
         ) : (

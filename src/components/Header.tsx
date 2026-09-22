@@ -54,7 +54,7 @@ export default function Header() {
           </Link>
           <Link
             href="/submit"
-            className="bg-(--color-ink) px-4 py-2 font-mono text-xs tracking-wide text-white uppercase transition hover:bg-(--color-accent)"
+            className="rounded-md bg-(--color-accent) px-4 py-2 font-mono text-xs tracking-wide text-white uppercase transition hover:brightness-90"
           >
             Submit
           </Link>
