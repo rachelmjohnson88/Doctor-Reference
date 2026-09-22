@@ -10,17 +10,19 @@ export default function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="border-b border-slate-200 bg-white">
+    <section className="border-b border-(--color-rule) bg-(--color-page-deep)">
       <div className="mx-auto max-w-5xl px-4 py-10">
         {eyebrow && (
-          <p className="text-sm font-medium tracking-wide text-[#0f4c5c] uppercase">
+          <p className="small-caps text-sm font-bold tracking-wide text-(--color-brand)">
             {eyebrow}
           </p>
         )}
-        <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-(--color-ink)">
           {title}
         </h1>
-        {description && <p className="mt-2 text-slate-600">{description}</p>}
+        {description && (
+          <p className="mt-2 text-(--color-ink-soft)">{description}</p>
+        )}
         {children}
       </div>
     </section>

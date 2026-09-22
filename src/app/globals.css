@@ -1,19 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --color-page: #f7f8f6;
-  --color-ink: #16232e;
+  --color-page: #f5efe1;
+  --color-page-deep: #eee4cd;
+  --color-ink: #241f1a;
+  --color-ink-soft: #4a4038;
+  --color-brand: #7a2331;
+  --color-brand-dark: #591a24;
+  --color-gold: #a9812f;
+  --color-gold-soft: #c9a86a;
+  --color-rule: #d9cbab;
 }
 
 @theme inline {
-  --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
+  --font-body: var(--font-body);
 }
 
 body {
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Georgia, serif;
 }
 
 .font-serif {
   font-family: var(--font-serif), Georgia, serif;
+}
+
+.rule-gold {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-gold) 0,
+    var(--color-gold) 2px,
+    transparent 2px,
+    transparent 5px,
+    var(--color-brand) 5px,
+    var(--color-brand) 6px
+  );
+}
+
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
 }

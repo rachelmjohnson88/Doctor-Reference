@@ -27,7 +27,7 @@ export default function SearchBox({ initialQuery = "" }: { initialQuery?: string
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+        className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-(--color-ink-soft)/60"
         aria-hidden="true"
       >
         <circle cx="11" cy="11" r="7" />
@@ -39,7 +39,7 @@ export default function SearchBox({ initialQuery = "" }: { initialQuery?: string
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search conditions, scores, protocols…"
-        className="w-full rounded-md border border-slate-300 bg-slate-50 py-1.5 pr-3 pl-8 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0f4c5c] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+        className="w-full rounded-sm border border-(--color-rule) bg-white/70 py-1.5 pr-3 pl-8 text-sm text-(--color-ink) placeholder:text-(--color-ink-soft)/60 focus:border-(--color-brand) focus:bg-white focus:outline-none focus:ring-1 focus:ring-(--color-brand)"
       />
     </form>
   );

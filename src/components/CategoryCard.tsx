@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Category } from "@/lib/content";
 import { categoryColors } from "@/lib/theme";
-import CategoryIcon from "./CategoryIcon";
 
 export default function CategoryCard({
   category,
@@ -15,24 +14,22 @@ export default function CategoryCard({
   return (
     <Link
       href={`/category/${category.slug}`}
-      className={`group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md ${colors.ring}`}
+      className={`group flex overflow-hidden rounded-sm border border-(--color-rule) bg-white/60 shadow-[0_1px_2px_rgba(36,31,26,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(36,31,26,0.12)] ${colors.ring}`}
     >
-      <div className="flex items-start gap-3">
-        <span
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${colors.icon}`}
+      <span className={`w-2.5 shrink-0 ${colors.spine}`} aria-hidden="true" />
+      <div className="p-5">
+        <h3 className="font-serif text-lg font-semibold text-(--color-ink)">
+          {category.name}
+        </h3>
+        <p className="mt-1.5 text-[15px] text-(--color-ink-soft)">
+          {category.description}
+        </p>
+        <p
+          className={`small-caps mt-3 text-xs font-bold tracking-wide ${colors.text}`}
         >
-          <CategoryIcon slug={category.slug} className="h-4.5 w-4.5" />
-        </span>
-        <div>
-          <h3 className="font-serif font-semibold text-slate-900">
-            {category.name}
-          </h3>
-          <p className="mt-1 text-sm text-slate-600">{category.description}</p>
-        </div>
+          {count} {count === 1 ? "Article" : "Articles"}
+        </p>
       </div>
-      <p className="mt-4 text-xs font-medium tracking-wide text-slate-400 uppercase">
-        {count} {count === 1 ? "article" : "articles"}
-      </p>
     </Link>
   );
 }
