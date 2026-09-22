@@ -5,19 +5,23 @@ import { categoryColors } from "@/lib/theme";
 export default function CategoryCard({
   category,
   count,
+  index,
 }: {
   category: Category;
   count: number;
+  index: number;
 }) {
   const colors = categoryColors[category.color];
 
   return (
     <Link
       href={`/category/${category.slug}`}
-      className={`group block overflow-hidden rounded-xl border border-(--color-rule) bg-white shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md ${colors.ring}`}
+      className={`group flex gap-4 rounded-xl border border-(--color-rule) bg-white p-5 shadow-sm ring-1 ring-transparent transition hover:-translate-y-0.5 hover:shadow-md ${colors.ring}`}
     >
-      <div className={`h-1 w-full ${colors.bar}`} />
-      <div className="p-5">
+      <span className={`font-serif text-2xl ${colors.text}/60`}>
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div>
         <h3 className="font-serif font-semibold text-(--color-ink)">
           {category.name}
         </h3>

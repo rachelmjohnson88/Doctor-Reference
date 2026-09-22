@@ -75,11 +75,12 @@ export default async function Home() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {categories.map((category) => (
+            {categories.map((category, i) => (
               <CategoryCard
                 key={category.slug}
                 category={category}
                 count={countBySlug[category.slug] ?? 0}
+                index={i}
               />
             ))}
           </div>
