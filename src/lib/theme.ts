@@ -3,38 +3,37 @@ import type { CategoryColor } from "./content";
 type ColorClasses = {
   badge: string;
   bar: string;
-  icon: string;
   ring: string;
   text: string;
 };
 
+// Muted, desaturated hex values — softer than Tailwind's default palette
+// so category color-coding stays legible without reading as bright/candy.
+// Class names are written out literally (not built from variables) so
+// Tailwind's build-time scanner can see and generate them.
 export const categoryColors: Record<CategoryColor, ColorClasses> = {
   blue: {
-    badge: "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20",
-    bar: "bg-blue-600",
-    icon: "bg-blue-100 text-blue-700",
-    ring: "hover:ring-blue-300",
-    text: "text-blue-600",
+    badge: "bg-[#5b7691]/10 text-[#5b7691] ring-1 ring-inset ring-[#5b7691]/25",
+    bar: "bg-[#5b7691]",
+    ring: "hover:ring-[#5b7691]/30",
+    text: "text-[#5b7691]",
   },
   rose: {
-    badge: "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20",
-    bar: "bg-rose-600",
-    icon: "bg-rose-100 text-rose-700",
-    ring: "hover:ring-rose-300",
-    text: "text-rose-600",
+    badge: "bg-[#a15c68]/10 text-[#a15c68] ring-1 ring-inset ring-[#a15c68]/25",
+    bar: "bg-[#a15c68]",
+    ring: "hover:ring-[#a15c68]/30",
+    text: "text-[#a15c68]",
   },
   amber: {
-    badge: "bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-600/20",
-    bar: "bg-amber-500",
-    icon: "bg-amber-100 text-amber-800",
-    ring: "hover:ring-amber-300",
-    text: "text-amber-600",
+    badge: "bg-[#a17c46]/10 text-[#a17c46] ring-1 ring-inset ring-[#a17c46]/25",
+    bar: "bg-[#a17c46]",
+    ring: "hover:ring-[#a17c46]/30",
+    text: "text-[#a17c46]",
   },
   teal: {
-    badge: "bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-600/20",
-    bar: "bg-teal-600",
-    icon: "bg-teal-100 text-teal-700",
-    ring: "hover:ring-teal-300",
-    text: "text-teal-600",
+    badge: "bg-[#4b7d73]/10 text-[#4b7d73] ring-1 ring-inset ring-[#4b7d73]/25",
+    bar: "bg-[#4b7d73]",
+    ring: "hover:ring-[#4b7d73]/30",
+    text: "text-[#4b7d73]",
   },
 };
