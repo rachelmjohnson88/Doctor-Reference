@@ -9,7 +9,7 @@ export default function Footer() {
           for clinical judgment.
         </p>
         <p className="mt-4 text-xs text-slate-400">
-          &copy; {new Date().getFullYear()} RefDoc.
+          &copy; {new Date().getFullYear()} Surgipedia.
         </p>
       </div>
     </footer>

@@ -15,7 +15,7 @@ const serif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "RefDoc — clinical reference",
+  title: "Surgipedia — clinical reference",
   description: "A quick-reference site for doctors: scoring systems, protocols, and classifications.",
 };
 

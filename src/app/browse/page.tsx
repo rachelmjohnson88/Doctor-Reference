@@ -3,7 +3,7 @@ import ArticleCard from "@/components/ArticleCard";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Browse — RefDoc",
+  title: "Browse — Surgipedia",
 };
 
 export default function BrowsePage() {

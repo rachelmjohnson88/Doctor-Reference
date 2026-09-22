@@ -12,7 +12,7 @@ export async function generateMetadata({
 }: PageProps<"/article/[slug]">) {
   const { slug } = await params;
   const article = getArticle(slug);
-  return { title: article ? `${article.title} — RefDoc` : "RefDoc" };
+  return { title: article ? `${article.title} — Surgipedia` : "Surgipedia" };
 }
 
 export default async function ArticlePage({

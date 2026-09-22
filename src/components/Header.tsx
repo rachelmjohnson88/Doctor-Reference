@@ -21,7 +21,7 @@ export default function Header() {
           </span>
           <span className="flex items-baseline gap-2">
             <span className="font-serif text-lg font-semibold tracking-tight text-slate-900">
-              RefDoc
+              Surgipedia
             </span>
             <span className="hidden text-sm text-slate-500 sm:inline">
               clinical reference
