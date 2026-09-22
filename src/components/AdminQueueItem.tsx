@@ -39,8 +39,8 @@ export default function AdminQueueItem({
           </h3>
           <p className="mt-1 text-sm text-slate-600">{entry.summary}</p>
           <p className="mt-1 text-xs text-slate-400">
-            Submitted by {entry.contributorName} ·{" "}
-            {new Date(entry.submittedAt).toLocaleString()}
+            Submitted by {entry.contributorName}, {entry.contributorCredentials}{" "}
+            · {new Date(entry.submittedAt).toLocaleString()}
           </p>
         </div>
         <div className="flex shrink-0 gap-2">

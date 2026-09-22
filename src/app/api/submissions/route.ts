@@ -7,6 +7,7 @@ type SectionInput = { heading: string; body: string[] };
 type RequestBody = {
   passphrase?: string;
   contributorName?: string;
+  contributorCredentials?: string;
   title?: string;
   category?: string;
   summary?: string;
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
   }
 
   const contributorName = body.contributorName?.trim();
+  const contributorCredentials = body.contributorCredentials?.trim();
   const title = body.title?.trim();
   const category = body.category?.trim();
   const summary = body.summary?.trim();
@@ -45,11 +47,18 @@ export async function POST(request: Request) {
     }))
     .filter((s) => s.heading && s.body.length > 0);
 
-  if (!contributorName || !title || !category || !summary || sections.length === 0) {
+  if (
+    !contributorName ||
+    !contributorCredentials ||
+    !title ||
+    !category ||
+    !summary ||
+    sections.length === 0
+  ) {
     return NextResponse.json(
       {
         error:
-          "Your name, title, category, summary, and at least one section are required.",
+          "Your name, qualifications, title, category, summary, and at least one section are required.",
       },
       { status: 400 }
     );
@@ -66,6 +75,7 @@ export async function POST(request: Request) {
 
   const entry = await submitArticle({
     contributorName,
+    contributorCredentials,
     title,
     category,
     summary,

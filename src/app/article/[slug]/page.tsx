@@ -55,8 +55,8 @@ export default async function ArticlePage({
           </h1>
           <p className="mt-3 text-lg text-slate-600">{article.summary}</p>
           <p className="mt-2 text-xs text-slate-400">
-            Contributed by {article.contributorName} · Last updated{" "}
-            {article.updated}
+            Contributed by {article.contributorName},{" "}
+            {article.contributorCredentials} · Last updated {article.updated}
           </p>
         </div>
       </section>

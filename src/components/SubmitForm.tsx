@@ -10,6 +10,7 @@ const emptySection = (): SectionDraft => ({ heading: "", bodyText: "" });
 export default function SubmitForm({ categories }: { categories: Category[] }) {
   const [passphrase, setPassphrase] = useState("");
   const [contributorName, setContributorName] = useState("");
+  const [contributorCredentials, setContributorCredentials] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]?.slug ?? "");
   const [summary, setSummary] = useState("");
@@ -46,6 +47,7 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
         body: JSON.stringify({
           passphrase,
           contributorName,
+          contributorCredentials,
           title,
           category,
           summary,
@@ -123,6 +125,20 @@ export default function SubmitForm({ categories }: { categories: Category[] }) {
         <p className="mt-1 text-xs text-slate-400">
           Shown as the contributor on the published article.
         </p>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700">
+          Your qualifications
+        </label>
+        <input
+          type="text"
+          required
+          value={contributorCredentials}
+          onChange={(e) => setContributorCredentials(e.target.value)}
+          placeholder="e.g. MD, FACS — Vascular Surgery"
+          className="mt-1 w-full max-w-xs rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-[#0f4c5c] focus:outline-none focus:ring-1 focus:ring-[#0f4c5c]"
+        />
       </div>
 
       <div>
